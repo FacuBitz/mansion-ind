@@ -7,30 +7,36 @@ import {
   Divider,
   Heading,
   Stack,
+  Flex,
+  Image,
+  Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import React from "react";
 
-const Item = ({ id, name, category, img }) => {
+const Item = ({ id, name, img, price }) => {
   return (
     <div>
       <div key={id}>
-        <Center p="1rem">
-          <Card>
+        <Flex>
+          <Card maxW="sm">
             <CardBody>
-              <Image src={img} />
+              <Image boxSize={"300px"} src={img} />
               <Stack mt="6" spacing="3">
                 <Heading size="md">{name}</Heading>
-                <Text>Category: {category}</Text>
+                <Text>${price}.-</Text>
               </Stack>
             </CardBody>
             <Divider />
             <CardFooter>
-              <Center>
-                <Button variant="solid" colorScheme="blue"></Button>
+              <Center className="btn-center">
+                <Button variant="solid" colorScheme="blue">
+                  <Link to={`/item/${id}`}>Details</Link>
+                </Button>
               </Center>
             </CardFooter>
           </Card>
-        </Center>
+        </Flex>
       </div>
     </div>
   );

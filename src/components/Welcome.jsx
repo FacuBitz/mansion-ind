@@ -1,13 +1,15 @@
 import React from "react";
-import { Box, Image } from "@chakra-ui/react";
-import fondo from "../assets/img/hombre-caminando.jpg";
+import { Box, Center, Image } from "@chakra-ui/react";
+import fondo from "../assets/img/welcome.jpg";
 
 const Welcome = () => {
   return (
     <>
-      <Box boxSize="sm">
-        <Image src={fondo} alt="hombre" />
-      </Box>
+      <Center>
+        <Box boxSize="xxl" pt="50px">
+          <Image src={fondo} alt="hombre" />
+        </Box>
+      </Center>
     </>
   );
 };

@@ -1,27 +1,24 @@
-import { Container } from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 import React from "react";
 import Item from "./Item";
 
-const ItemList = ({ clothes }) => {
-  console.log(clothes);
+const ItemList = ({ products }) => {
   return (
     <>
-      <Container>
-        {clothes?.map((prod) => {
-          console.log(prod);
-          <div key={prod.id}>
-            <h1>{prod.name}</h1>
-            <p>{prod.price}</p>
-          </div>;
-          // <Item
-          //   key={prod.id}
-          //   id={prod.id}
-          //   name={prod.name}
-          //   description={prod.description}
-          //   price={prod.price}
-          //   category={prod.category}
-          // />;
-        })}
+      <Container maxW="container.xl">
+        <Flex gap={"5"}>
+          {products.map((product) => (
+            <Item
+              key={product.id}
+              id={product.id}
+              img={product.img}
+              name={product.name}
+              description={product.description}
+              price={product.price}
+              category={product.category}
+            />
+          ))}
+        </Flex>
       </Container>
     </>
   );

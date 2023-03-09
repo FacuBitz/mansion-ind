@@ -11,6 +11,7 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 const NavBar = () => {
   return (
@@ -30,7 +31,13 @@ const NavBar = () => {
           </Link>
         </Menu>
         <Menu>
-          <MenuButton as={Button} colorScheme="gray" variant="ghost" mr="4">
+          <MenuButton
+            as={Button}
+            colorScheme="gray"
+            variant="ghost"
+            mr="4"
+            rightIcon={<ChevronDownIcon />}
+          >
             Categorias
           </MenuButton>
           <MenuList>
