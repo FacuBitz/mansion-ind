@@ -1,12 +1,17 @@
 # Mansion.ind
+
 **Descripcion:**
 
 E-commerce de ropa masculina
 
-**Herramientas utlizadas:**
+**Herramientas utilizadas:**
 
-* Visual Studio Code
-* Vite
-* Chakra
+- Visual Studio Code
+- Vite
+- Chakra
+- React Router Dom
+- Hooks
+
 ---
 
+![](./public/funcionamiento.gif)
