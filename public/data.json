@@ -4,7 +4,7 @@
     "name": "Camisa Rayas",
     "price": 15590,
     "description": "Camisa regular fit de cuello italiano y manga larga acabada en puño con botón. Cierre frontal de botonadura.",
-    "img": "./src/assets/img/camisa.jpg",
+    "img": "../../src/assets/img/camisa.jpg",
     "category": "hombres",
     "stock": 1
   },
@@ -13,7 +13,7 @@
     "name": "Polo Jacquard",
     "price": 11000,
     "description": "Polo de cuello solapa con cierre frontal de botonadura. Manga corta acabada con rib.",
-    "img": "./src/assets/img/chomba.jpg",
+    "img": "../../src/assets/img/chomba.jpg",
     "category": "hombres",
     "stock": 1
   },
@@ -22,7 +22,7 @@
     "name": "Camisa Crop",
     "price": 13500,
     "description": "Camisa de cuello solapa y escote pico con manga larga. Cierre con lazada en delantero.",
-    "img": "./src/assets/img/camison.jpg",
+    "img": "../../src/assets/img/camison.jpg",
     "category": "mujeres",
     "stock": 1
   },
@@ -31,7 +31,7 @@
     "name": "Remera Rayas",
     "price": 5200,
     "description": "Camiseta con cuello redondo y manga corta. Aplique etiqueta.",
-    "img": "./src/assets/img/remera.jpg",
+    "img": "../../src/assets/img/remera.jpg",
     "category": "niños",
     "stock": 1
   }

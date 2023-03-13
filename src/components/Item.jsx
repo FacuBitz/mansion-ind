@@ -30,9 +30,11 @@ const Item = ({ id, name, img, price }) => {
             <Divider />
             <CardFooter>
               <Center className="btn-center">
-                <Button variant="solid" colorScheme="blue">
-                  <Link to={`/item/${id}`}>Details</Link>
-                </Button>
+                <Link to={`/item/${id}`}>
+                  <Button variant="solid" colorScheme="blue">
+                    Details
+                  </Button>
+                </Link>
               </Center>
             </CardFooter>
           </Card>
