@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardBody,
@@ -12,11 +12,34 @@ import {
   Button,
   ButtonGroup,
 } from "@chakra-ui/react";
+import ItemCount from "./ItemCount";
+import { useContext } from "react";
+import { CartContext } from "../context/StateComponent";
+import { useParams } from "react-router-dom";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const ItemDetail = ({ data }) => {
+  const { cart, setCart } = useContext(CartContext);
+  console.log(cart);
+
+  const { id } = useParams();
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    const db = getFirestore();
+
+    const oneItem = doc(db, "ropa", `${id}`);
+    getDoc(oneItem).then((snapshot) => {
+      const doc = snapshot.data();
+      setProduct(doc);
+    });
+  }, []);
+
+  const dataFilter = data.filter((dato) => dato.id == id);
+
   return (
     <>
-      {data.map((prod) => (
+      {dataFilter.map((prod) => (
         <Center pt="50px" key={prod.id}>
           <Card maxW="sm">
             <CardBody>
@@ -31,11 +54,8 @@ const ItemDetail = ({ data }) => {
             </CardBody>
             <Divider />
             <CardFooter>
-              <ButtonGroup spacing="2">
-                <Button variant="ghost" colorScheme="blue">
-                  Agregar
-                </Button>
-              </ButtonGroup>
+              <ItemCount />
+              <Button onClick={setCart}>Agregar al carrito</Button>
             </CardFooter>
           </Card>
         </Center>

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 import { Heading, Center } from "@chakra-ui/react";
+import { collection, doc, getDocs, getFirestore } from "firebase/firestore";
 
 const ItemListContainer = () => {
   // toma el parametro category de la url si existe
@@ -11,25 +12,23 @@ const ItemListContainer = () => {
   // hook de estado, prod=variable, setProd=funcion modificadora
   const [prod, setProd] = useState([]);
 
-  async function fetchData() {
-    try {
-      const response = await fetch("/data.json");
-      const data = await response.json();
+  useEffect(() => {
+    const db = getFirestore();
+    const itemsCollection = collection(db, "ropa");
+    getDocs(itemsCollection).then((snapshot) => {
+      const docs = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
       if (category === undefined) {
-        setProd(data);
+        setProd(docs);
       } else {
-        const catFilter = data.filter(
+        const catFilter = docs.filter(
           (products) => products.category === category
         );
         setProd(catFilter);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
+    });
   }, [category]);
 
   return (
@@ -41,6 +40,7 @@ const ItemListContainer = () => {
           </Heading>
         </Center>
         <ItemList products={prod} />
+        {console.log(prod)}
       </div>
     </>
   );
