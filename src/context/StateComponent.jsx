@@ -5,6 +5,7 @@ export const CartContext = createContext();
 const StateComponent = ({ children }) => {
   const [counter, setCounter] = useState(1);
   const [cart, setCart] = useState([]);
+  const [cartQty, setCartQty] = useState(0);
   console.log(cart);
 
   const addQty = () => {
@@ -19,6 +20,7 @@ const StateComponent = ({ children }) => {
 
   const addItem = (item, quantity) => {
     console.log(item.name);
+    let totalItems = cartQty;
     let newCart;
     let product = cart.find((product) => product.id === item.id);
     if (product) {
@@ -28,6 +30,8 @@ const StateComponent = ({ children }) => {
       product = { ...item, quantity: quantity };
       newCart = [...cart, product];
     }
+    totalItems += quantity;
+    setCartQty(totalItems);
     setCart(newCart);
     setCounter(1);
   };
@@ -52,6 +56,7 @@ const StateComponent = ({ children }) => {
         clearCart,
         isInCart,
         removeProduct,
+        cartQty,
       }}
     >
       {children}
