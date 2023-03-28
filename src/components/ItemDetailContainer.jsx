@@ -1,22 +1,19 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
   const [prod, setProd] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
     const db = getFirestore();
 
-    const itemsCollection = collection(db, "ropa");
-    getDocs(itemsCollection).then((snapshot) => {
-      const docs = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setProd(docs);
-    });
+    const oneItem = doc(db, "ropa", `${id}`);
+    getDoc(oneItem).then((snapshot) =>
+      setProd({ id: snapshot.id, ...snapshot.data() })
+    );
   }, []);
 
   return (

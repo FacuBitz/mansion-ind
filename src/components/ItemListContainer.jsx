@@ -40,7 +40,6 @@ const ItemListContainer = () => {
           </Heading>
         </Center>
         <ItemList products={prod} />
-        {console.log(prod)}
       </div>
     </>
   );
