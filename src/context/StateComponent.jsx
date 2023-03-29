@@ -36,12 +36,15 @@ const StateComponent = ({ children }) => {
     setCounter(1);
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+    setCartQty(0);
+  };
 
   const isInCart = (id) =>
     cart.find((product) => product.id === id) ? true : false;
 
-  const removeProduct = (id) =>
+  const removeItem = (id) =>
     setCart(cart.filter((product) => product.id !== id));
 
   return (
@@ -55,7 +58,7 @@ const StateComponent = ({ children }) => {
         addItem,
         clearCart,
         isInCart,
-        removeProduct,
+        removeItem,
         cartQty,
       }}
     >

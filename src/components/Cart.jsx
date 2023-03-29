@@ -1,17 +1,30 @@
-import { Center, Heading } from "@chakra-ui/react";
-import React from "react";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/StateComponent";
+import { Button } from "@chakra-ui/react";
+import Brief from "./Brief";
 
 const Cart = () => {
+  const { cart } = useContext(CartContext);
+
+  if (cart.length === 0) {
+    return (
+      <>
+        <div className="cart_">
+          <h2>El carrito esta vacio..</h2>
+          <Link to={"/catalogue"}>
+            <Button colorScheme="red">Ir al catálogo</Button>
+          </Link>
+        </div>
+      </>
+    );
+  }
+
   return (
-    <>
-      <div>
-        <Center h="100px" color="black">
-          <Heading as="h2" size="2xl">
-            Cart
-          </Heading>
-        </Center>
-      </div>
-    </>
+    <div>
+      {console.log(cart)}
+      <Brief />
+    </div>
   );
 };
 
