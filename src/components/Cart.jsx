@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../context/StateComponent";
 import { Button } from "@chakra-ui/react";
 import Brief from "./Brief";
+import SendOrder from "./SendOrder";
 
 const Cart = () => {
   const { cart } = useContext(CartContext);
@@ -24,6 +25,7 @@ const Cart = () => {
     <div>
       {console.log(cart)}
       <Brief />
+      <SendOrder cart={cart} />
     </div>
   );
 };
