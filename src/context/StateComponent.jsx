@@ -6,6 +6,7 @@ const StateComponent = ({ children }) => {
   const [counter, setCounter] = useState(1);
   const [cart, setCart] = useState([]);
   const [cartQty, setCartQty] = useState(0);
+  const [total, setTotal] = useState(0);
   console.log(cart);
 
   const addQty = () => {
@@ -19,33 +20,52 @@ const StateComponent = ({ children }) => {
   // };
 
   const addItem = (item, quantity) => {
-    console.log(item.name);
     let totalItems = cartQty;
-    let newCart;
-    let product = cart.find((product) => product.id === item.id);
-    if (product) {
-      product.quantity += quantity;
-      newCart = [...cart];
+    if (isInCart(item.id)) {
+      setCart(
+        cart.map((product) => {
+          return product.id === item.id
+            ? { ...product, quantity: product.quantity + quantity }
+            : product;
+        })
+      );
     } else {
-      product = { ...item, quantity: quantity };
-      newCart = [...cart, product];
+      setCart([...cart, { ...item, quantity }]);
     }
     totalItems += quantity;
     setCartQty(totalItems);
-    setCart(newCart);
     setCounter(1);
-  };
-
-  const clearCart = () => {
-    setCart([]);
-    setCartQty(0);
+    addAmount(item.price, quantity);
   };
 
   const isInCart = (id) =>
     cart.find((product) => product.id === id) ? true : false;
 
-  const removeItem = (id) =>
+  // TODAVIA NO LO ESTOY USANDO !!!!!!!
+  const clearCart = () => {
+    setCart([]);
+    setCartQty(0);
+    setTotal(0);
+  };
+
+  const removeItem = (id, quantity, price) => {
     setCart(cart.filter((product) => product.id !== id));
+    let newCartQty = cartQty - quantity;
+    setCartQty(newCartQty);
+    rmvAmount(price, quantity);
+  };
+
+  const addAmount = (price, quantity) => {
+    let amount = total;
+    amount += price * quantity;
+    setTotal(amount);
+  };
+
+  const rmvAmount = (price, quantity) => {
+    let amount = total;
+    amount -= price * quantity;
+    setTotal(amount);
+  };
 
   return (
     <CartContext.Provider
@@ -60,6 +80,7 @@ const StateComponent = ({ children }) => {
         isInCart,
         removeItem,
         cartQty,
+        total,
       }}
     >
       {children}

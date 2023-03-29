@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 
 const Brief = () => {
-  const { cart, removeItem } = useContext(CartContext);
+  const { cart, removeItem, total } = useContext(CartContext);
 
   return (
     <>
@@ -32,7 +32,10 @@ const Brief = () => {
                 <Text>Subtotal: {item.price * item.quantity}.-</Text>
               </CardBody>
               <CardFooter>
-                <Button colorScheme="red" onClick={() => removeItem(item.id)}>
+                <Button
+                  colorScheme="red"
+                  onClick={() => removeItem(item.id, item.quantity, item.price)}
+                >
                   X
                 </Button>
               </CardFooter>
@@ -40,9 +43,7 @@ const Brief = () => {
           </Container>
         );
       })}
-      {/* <div>
-        Total: {total}.-
-      </div> */}
+      <div>Total: {total}.-</div>
     </>
   );
 };
