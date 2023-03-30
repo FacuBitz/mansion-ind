@@ -4,6 +4,7 @@ import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 import { Heading, Center } from "@chakra-ui/react";
 import { collection, doc, getDocs, getFirestore } from "firebase/firestore";
+import Loading from "./Loading";
 
 const ItemListContainer = () => {
   // toma el parametro category de la url si existe
@@ -11,6 +12,8 @@ const ItemListContainer = () => {
 
   // hook de estado, prod=variable, setProd=funcion modificadora
   const [prod, setProd] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const db = getFirestore();
@@ -28,8 +31,13 @@ const ItemListContainer = () => {
         );
         setProd(catFilter);
       }
+      setIsLoading(false);
     });
   }, [category]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
