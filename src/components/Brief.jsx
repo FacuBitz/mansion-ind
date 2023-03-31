@@ -10,40 +10,46 @@ import {
   CardFooter,
   Text,
   Box,
+  Center,
+  Stack,
+  Image,
+  Flex,
 } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 const Brief = () => {
-  const { cart, removeItem, total } = useContext(CartContext);
+  const { cart, removeItem } = useContext(CartContext);
 
   return (
     <>
       {cart.map((item) => {
         return (
-          <Container key={item.id}>
-            <Card>
-              <Box>
-                <img src={item.img} alt="imagen_producto" />
-              </Box>
-              <CardHeader>
+          <Card maxW="30vh" mt="50px" key={item.id}>
+            <Image src={item.img} alt={item.name} />
+            <CardBody pt="0" pb="0">
+              <Stack mt="6" mb="4" spacing="3">
                 <Heading size="md">{item.name}</Heading>
-              </CardHeader>
-              <CardBody>
-                <Text as="b">Cantidad: {item.quantity}</Text>
-                <Text>Subtotal: {item.price * item.quantity}.-</Text>
-              </CardBody>
-              <CardFooter>
-                <Button
-                  colorScheme="red"
-                  onClick={() => removeItem(item.id, item.quantity, item.price)}
-                >
-                  X
-                </Button>
-              </CardFooter>
-            </Card>
-          </Container>
+                <Flex justify="space-between">
+                  <Text>
+                    {item.quantity} x ${item.price}.-
+                  </Text>
+                  <Button
+                    p="3"
+                    fontSize="15px"
+                    size="xs"
+                    variant="ghost"
+                    onClick={() =>
+                      removeItem(item.id, item.quantity, item.price)
+                    }
+                  >
+                    <DeleteIcon color="red.500" />
+                  </Button>
+                </Flex>
+              </Stack>
+            </CardBody>
+          </Card>
         );
       })}
-      <div>Total: {total}.-</div>
     </>
   );
 };

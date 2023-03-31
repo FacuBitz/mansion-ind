@@ -24,21 +24,34 @@ const ItemDetail = ({ data }) => {
   return (
     <>
       <Center pt="50px" key={data.id}>
-        <Card maxW="sm">
-          <CardBody>
-            <Image src={data.img} alt={data.name} borderRadius="lg" />
-            <Stack mt="6" spacing="3">
-              <Heading size="md">{data.name}</Heading>
-              <Text>{data.description}</Text>
+        <Card
+          direction={{ base: "column", sm: "row" }}
+          overflow="hidden"
+          variant="outline"
+        >
+          <Image
+            objectFit="cover"
+            maxW={{ base: "100%", sm: "500px" }}
+            src={data.img}
+            alt={data.name}
+            borderRadius="lg"
+          />
+
+          <Stack p="40px">
+            <CardBody boxSize="md">
+              <Heading size="xl" pb="20px">
+                {data.name}
+              </Heading>
+              <Text pb="20px">{data.description}</Text>
               <Text color="blue.600" fontSize="2xl">
-                {data.price}
+                ${data.price}.-
               </Text>
-            </Stack>
-          </CardBody>
-          <Divider />
-          <CardFooter>
-            <ItemCount onAdd={onAdd} stock={data.stock} />
-          </CardFooter>
+            </CardBody>
+
+            <CardFooter>
+              <ItemCount onAdd={onAdd} stock={data.stock} id={data.id} />
+            </CardFooter>
+          </Stack>
         </Card>
       </Center>
     </>

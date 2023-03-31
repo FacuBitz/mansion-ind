@@ -1,35 +1,46 @@
-import React, { useContext } from "react";
-import { IconButton, Tooltip, Button } from "@chakra-ui/react";
+import React, { useContext, useEffect } from "react";
+import { IconButton, Tooltip, Button, HStack } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { CartContext } from "../context/StateComponent";
 
-const ItemCount = ({ onAdd, stock }) => {
-  const { addQty, rmvQty, counter } = useContext(CartContext);
+const ItemCount = ({ onAdd, stock, id }) => {
+  const { addQty, rmvQty, counter, setCounter } = useContext(CartContext);
+
+  // si agrego cantidad pero no lo agrego al carrito y voy a otro prod que vuelva a 1 el contador
+  useEffect(() => {
+    setCounter(1);
+  }, [id]);
 
   return (
     <div>
-      {counter < stock ? (
-        <IconButton icon={<AddIcon />} onClick={addQty} />
-      ) : (
-        <Tooltip label="stock limit reached" placement="bottom">
-          <IconButton icon={<AddIcon />} isDisabled />
-        </Tooltip>
-      )}
+      <HStack spacing="15px">
+        {counter <= 1 ? (
+          <Tooltip label="minimum stock reached" placement="bottom">
+            <IconButton icon={<MinusIcon />} isDisabled />
+          </Tooltip>
+        ) : (
+          <IconButton variant="ghost" icon={<MinusIcon />} onClick={rmvQty} />
+        )}
 
-      <span>{counter}</span>
+        <span>{counter}</span>
 
-      {counter <= 1 ? (
-        <Tooltip label="minimum stock reached" placement="bottom">
-          <IconButton icon={<MinusIcon />} isDisabled />
-        </Tooltip>
-      ) : (
-        <IconButton icon={<MinusIcon />} onClick={rmvQty} />
-      )}
+        {counter < stock ? (
+          <IconButton variant="ghost" icon={<AddIcon />} onClick={addQty} />
+        ) : (
+          <Tooltip label="stock limit reached" placement="bottom">
+            <IconButton icon={<AddIcon />} isDisabled />
+          </Tooltip>
+        )}
 
-      {/* <button onClick={() => reset()}>reset</button> */}
-      <Button onClick={() => onAdd(counter)} variant="solid" colorScheme="blue">
-        Agregar al carrito
-      </Button>
+        {/* <button onClick={() => reset()}>reset</button> */}
+        <Button
+          onClick={() => onAdd(counter)}
+          variant="solid"
+          colorScheme="facebook"
+        >
+          Agregar al carrito
+        </Button>
+      </HStack>
     </div>
   );
 };

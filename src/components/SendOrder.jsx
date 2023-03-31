@@ -2,6 +2,15 @@ import { collection, addDoc, getFirestore } from "firebase/firestore";
 import { useState } from "react";
 import { useContext } from "react";
 import { CartContext } from "../context/StateComponent";
+import { Button, Center } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+  Flex,
+} from "@chakra-ui/react";
 
 const SendOrder = ({ cart }) => {
   const [orderId, setOrderId] = useState(null);
@@ -34,22 +43,30 @@ const SendOrder = ({ cart }) => {
   const orderCollection = collection(db, "order");
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nombre y apellido"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Correo electronico"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button type="submit">Enviar informacion</button>
+        <Flex gap="40px" mt="20px" align="end">
+          <FormControl isRequired>
+            <FormLabel>Nombre y apellido</FormLabel>
+            <Input type="text" onChange={(e) => setName(e.target.value)} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel>Email address</FormLabel>
+            <Input type="email" onChange={(e) => setEmail(e.target.value)} />
+          </FormControl>
+          <Button
+            colorScheme="facebook"
+            type="submit"
+            w="400px"
+            // isLoading
+            // loadingText="Submitting"
+          >
+            Finalizar compra
+          </Button>
+        </Flex>
       </form>
-      <p>Nro de orden: {orderId}</p>
-    </div>
+      {/* <p>Nro de orden: {orderId}</p> */}
+    </>
   );
 };
 

@@ -71,6 +71,7 @@ const StateComponent = ({ children }) => {
     <CartContext.Provider
       value={{
         counter,
+        setCounter,
         addQty,
         rmvQty,
         cart,
