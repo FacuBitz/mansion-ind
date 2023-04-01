@@ -11,6 +11,7 @@ import {
   Input,
   Flex,
 } from "@chakra-ui/react";
+import Swal from "sweetalert2";
 
 const SendOrder = ({ cart }) => {
   const [orderId, setOrderId] = useState(null);
@@ -23,7 +24,10 @@ const SendOrder = ({ cart }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addDoc(orderCollection, order).then(({ id }) => setOrderId(id));
+    addDoc(orderCollection, order).then(({ id }) => {
+      setOrderId(id);
+      popUp(id);
+    });
   };
 
   console.log(cart);
@@ -41,6 +45,14 @@ const SendOrder = ({ cart }) => {
   };
 
   const orderCollection = collection(db, "order");
+
+  const popUp = (id) => {
+    Swal.fire({
+      title: "Orden realizada con exito",
+      html: `Nro de orden: ${id}`,
+      icon: "success",
+    });
+  };
 
   return (
     <>

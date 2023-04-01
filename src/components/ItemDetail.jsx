@@ -13,12 +13,24 @@ import ItemCount from "./ItemCount";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/StateComponent";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ItemDetail = ({ data }) => {
   const { addItem } = useContext(CartContext);
 
+  const popUp = (data) => {
+    Swal.fire({
+      title: data.name,
+      text: "Agregado al carrito",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
   const onAdd = (quantity) => {
     addItem(data, quantity);
+    popUp(data);
   };
 
   return (
