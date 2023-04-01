@@ -66,18 +66,17 @@ const SendOrder = ({ cart }) => {
             <FormLabel>Email address</FormLabel>
             <Input type="email" onChange={(e) => setEmail(e.target.value)} />
           </FormControl>
-          <Button
-            colorScheme="facebook"
-            type="submit"
-            w="400px"
-            // isLoading
-            // loadingText="Submitting"
-          >
-            Finalizar compra
-          </Button>
+          {name && email ? (
+            <Button colorScheme="facebook" type="submit" w="400px">
+              Finalizar compra
+            </Button>
+          ) : (
+            <Button colorScheme="facebook" type="submit" w="400px" isDisabled>
+              Finalizar compra
+            </Button>
+          )}
         </Flex>
       </form>
-      {/* <p>Nro de orden: {orderId}</p> */}
     </>
   );
 };
