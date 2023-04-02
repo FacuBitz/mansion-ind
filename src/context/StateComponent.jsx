@@ -15,9 +15,6 @@ const StateComponent = ({ children }) => {
   const rmvQty = () => {
     setCounter(counter - 1);
   };
-  // const reset = () => {
-  //   setCounter(1);
-  // };
 
   const addItem = (item, quantity) => {
     let totalItems = cartQty;
@@ -41,7 +38,6 @@ const StateComponent = ({ children }) => {
   const isInCart = (id) =>
     cart.find((product) => product.id === id) ? true : false;
 
-  // TODAVIA NO LO ESTOY USANDO !!!!!!!
   const clearCart = () => {
     setCart([]);
     setCartQty(0);
@@ -77,11 +73,10 @@ const StateComponent = ({ children }) => {
         cart,
         setCart,
         addItem,
-        clearCart,
-        isInCart,
         removeItem,
         cartQty,
         total,
+        clearCart,
       }}
     >
       {children}

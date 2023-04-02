@@ -7,7 +7,7 @@ const Welcome = () => {
     <>
       <Center>
         <Box boxSize="xxl" pt="50px">
-          <Image src={fondo} alt="hombre" />
+          <Image src={fondo} alt="imagen welcome" />
         </Box>
       </Center>
     </>

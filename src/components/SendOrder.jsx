@@ -2,23 +2,18 @@ import { collection, addDoc, getFirestore } from "firebase/firestore";
 import { useState } from "react";
 import { useContext } from "react";
 import { CartContext } from "../context/StateComponent";
-import { Button, Center } from "@chakra-ui/react";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
-  Flex,
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Flex, Text } from "@chakra-ui/react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const SendOrder = ({ cart }) => {
   const [orderId, setOrderId] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
-  const { total } = useContext(CartContext);
+  const { total, clearCart } = useContext(CartContext);
 
   const db = getFirestore();
 
@@ -29,8 +24,6 @@ const SendOrder = ({ cart }) => {
       popUp(id);
     });
   };
-
-  console.log(cart);
 
   const order = {
     name,
@@ -46,11 +39,21 @@ const SendOrder = ({ cart }) => {
 
   const orderCollection = collection(db, "order");
 
+  const redirigir = () => {
+    navigate("/", { replace: true });
+    clearCart();
+  };
+
   const popUp = (id) => {
     Swal.fire({
       title: "Orden realizada con exito",
       html: `Nro de orden: ${id}`,
       icon: "success",
+      confirmButtonText: "Volver al menu",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        redirigir();
+      }
     });
   };
 
@@ -77,6 +80,7 @@ const SendOrder = ({ cart }) => {
           )}
         </Flex>
       </form>
+      <Text mt="20px">Nro de orden: {orderId}</Text>
     </>
   );
 };

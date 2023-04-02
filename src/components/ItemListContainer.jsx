@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 import { Heading, Center } from "@chakra-ui/react";
-import { collection, doc, getDocs, getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 import Loading from "./Loading";
 
 const ItemListContainer = () => {
@@ -15,6 +15,7 @@ const ItemListContainer = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  // traigo los prod de firebase, si detecta alguna categoria filtra por esa categoria y guarda en prod
   useEffect(() => {
     const db = getFirestore();
     const itemsCollection = collection(db, "ropa");
@@ -44,7 +45,12 @@ const ItemListContainer = () => {
       <div>
         <Center h="100px" color="black">
           <Heading as="h2" size="2xl">
-            {!category ? <p>Catalogo</p> : <p>{`${category}`}</p>}
+            {!category ? (
+              <p>Catalogo</p>
+            ) : (
+              // selecciono el caracter en posicion 0, lo pongo en mayuscula y le agrego el resto del string como estaba
+              <p>{`${category[0].toUpperCase() + category.substring(1)}`}</p>
+            )}
           </Heading>
         </Center>
         <ItemList products={prod} />

@@ -32,7 +32,6 @@ const ItemCount = ({ onAdd, stock, id }) => {
           </Tooltip>
         )}
 
-        {/* <button onClick={() => reset()}>reset</button> */}
         <Button
           onClick={() => onAdd(counter)}
           variant="solid"

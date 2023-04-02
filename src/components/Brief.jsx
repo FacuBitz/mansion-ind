@@ -2,15 +2,10 @@ import { useContext } from "react";
 import { CartContext } from "../context/StateComponent";
 import {
   Button,
-  Container,
   Heading,
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   Text,
-  Box,
-  Center,
   Stack,
   Image,
   Flex,

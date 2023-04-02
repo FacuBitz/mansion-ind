@@ -3,8 +3,6 @@ import {
   Card,
   CardBody,
   CardFooter,
-  Center,
-  Divider,
   Heading,
   Stack,
   Flex,
@@ -27,15 +25,7 @@ const Item = ({ id, name, img, price }) => {
             </Stack>
           </CardBody>
 
-          <CardFooter
-          // justify="space-between"
-          // flexWrap="wrap"
-          // sx={{
-          //   "& > button": {
-          //     minW: "136px",
-          //   },
-          // }}
-          >
+          <CardFooter>
             <Link to={`/item/${id}`}>
               <Button size="sm" variant="outline" colorScheme="blue">
                 Details
