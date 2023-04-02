@@ -11,9 +11,19 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
+import Swal from "sweetalert2";
 
 const Brief = () => {
   const { cart, removeItem } = useContext(CartContext);
+
+  const popUp = () => {
+    Swal.fire({
+      title: "Producto eliminado del carrito",
+      icon: "warning",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
   return (
     <>
@@ -33,9 +43,10 @@ const Brief = () => {
                     fontSize="15px"
                     size="xs"
                     variant="ghost"
-                    onClick={() =>
-                      removeItem(item.id, item.quantity, item.price)
-                    }
+                    onClick={() => {
+                      removeItem(item.id, item.quantity, item.price);
+                      popUp();
+                    }}
                   >
                     <DeleteIcon color="red.500" />
                   </Button>
