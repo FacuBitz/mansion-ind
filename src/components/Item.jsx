@@ -16,7 +16,7 @@ const Item = ({ id, name, img, price }) => {
   return (
     <div key={id}>
       <Flex>
-        <Card maxW="20vw">
+        <Card maxW="37vh">
           <Image src={img} />
           <CardBody pt="0" pb="0">
             <Stack mt="6" spacing="3">
